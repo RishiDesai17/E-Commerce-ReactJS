@@ -1,9 +1,6 @@
 import React,{createContext,useState} from 'react';
 import {data} from '../data/data';
 
-data.forEach((item) => {
-    item.quantity = 0;
-  });
 export const Context = createContext({
     cartItems: [],
     totalPrice: 0,

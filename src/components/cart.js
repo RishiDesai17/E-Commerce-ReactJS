@@ -33,7 +33,7 @@ const Cart = (props) => {
                     <h4>{item.quantity} x {item.price}</h4>
                 </Grid>
             ))}
-            <h3 className="price">Total Price: {context.totalPrice}</h3>
+            <h3 className="price">Total Price: Rs.{context.totalPrice}</h3>
         </div>
     );
 }
