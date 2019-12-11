@@ -30,7 +30,7 @@ const Cart = (props) => {
                         <h3 style={{marginTop: 10}}>{item.quantity}</h3>
                         <Button className="cartButton" onClick={()=>delFromCart(item.id,item.price)}>-</Button>
                     </Grid>
-                    <Grid item xs={12} sm={6} lg={3} style={{textAlign: 'center'}}>
+                    <Grid item xs={12} sm={6} lg={3} style={{textAlign: 'center', fontSize: 30}}>
                         <h4>{item.quantity} x {item.price}</h4>
                     </Grid>
                 </Grid>

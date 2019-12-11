@@ -14,11 +14,10 @@ const ContextProvider = props => {
 
     const addToCart = (id,price) => {
         if(cartItem.some(item => item.id===id)){
-            const item = cartItem.find(x => {
+            cartItem.find(x => {
                 if(x.id === id){
                     x.quantity+=1;
                 }
-                return x;
             });
         }
         else{
@@ -34,8 +33,10 @@ const ContextProvider = props => {
       }
 
       const delFromCart = (id,price) => {
-            const item = cartItem.find(x => {
+            let qty = false;
+            cartItem.find(x => {
                 if(x.id === id){
+                    qty=true;
                     if(x.quantity>1){
                         x.quantity-=1;
                     }
@@ -46,9 +47,10 @@ const ContextProvider = props => {
                         });
                     }
                 }
-                return x;
             });
+        if(total>0 && qty){
         calcTotal(total-parseInt(price));
+        }
       }
 
       return(
