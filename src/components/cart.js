@@ -1,7 +1,9 @@
 import React,{useContext,useState} from 'react';
+import {Link} from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import {Context} from '../context/Context';
+import auth from '../auth';
 
 const Cart = (props) => {
     const context = useContext(Context);
@@ -15,7 +17,15 @@ const Cart = (props) => {
     }
 
     return(
-        <div className="font"> 
+        <div className="font">
+            <div>
+          {auth.isAuthenticated() ? (
+           <div><Link style={{position:'absolute', fontSize: 20,right: 150, top: 20, color:'white', textDecoration:'none'}} to="/login" onClick={() => {
+            auth.logout(() => {
+              props.history.push("/");
+            });
+          }}>LOGOUT</Link><h3 style={{textAlign: 'center'}}>Hi, {context.uname}</h3></div>) : ''}
+          </div> 
             <h1 style={{textAlign: 'center'}}>MY CART</h1>
             {context.cartItems.map((item)=>(
                 <Grid container className="card" style={{marginLeft: 0, alignItems:'center'}}>

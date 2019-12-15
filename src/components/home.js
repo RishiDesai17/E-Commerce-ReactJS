@@ -1,4 +1,5 @@
 import React, {useState,useContext} from 'react';
+import {Link} from 'react-router-dom';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -8,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import {data} from '../data/data';
 import {Context} from '../context/Context';
+import auth from '../auth';
 
 //assigning a new property flag to each object to keep track of whether it is present in the comparison list and quantity for cart 
 data.forEach((item) => {
@@ -15,7 +17,7 @@ data.forEach((item) => {
   item.quantity = 0;
 });
 
-const Home = () => {
+const Home = (props) => {
     const [compareItems, modifyCompareItems] = useState([]);
     const context = useContext(Context);
 
@@ -46,7 +48,15 @@ const Home = () => {
     }
     
     return (
-      <div>     
+      <div>
+        <div>
+          {auth.isAuthenticated() ? (
+           <div><Link style={{position:'absolute', fontSize: 20,right: 150, top: 20, color:'white', textDecoration:'none'}} to="/login" onClick={() => {
+            auth.logout(() => {
+              props.history.push("/");
+            });
+          }}>LOGOUT</Link><h3 style={{textAlign: 'center'}}>Hi, {context.uname}</h3></div>) : ''}
+          </div>     
     <Grid container>
       {data.map((item) => (
         <Grid item xs={12} sm={6} lg={3}>

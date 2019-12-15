@@ -5,12 +5,14 @@ export const Context = createContext({
     cartItems: [],
     totalPrice: 0,
     add: ()=>{},
-    del: ()=>{}
+    del: ()=>{},
+    transfer: ()=>{}
 });
 
 const ContextProvider = props => {
     const [cartItem, modifyCart] = useState([]);
     const [total, calcTotal] = useState(0);
+    const [username,setUsername] = useState("");
 
     const addToCart = (id,price) => {
         if(cartItem.some(item => item.id===id)){
@@ -49,12 +51,16 @@ const ContextProvider = props => {
                 }
             });
         if(total>0 && qty){
-        calcTotal(total-parseInt(price));
+            calcTotal(total-parseInt(price));
         }
       }
 
+      const transferUname = (uname) => {
+          setUsername(uname);
+      }
+
       return(
-          <Context.Provider value={{add: addToCart, del: delFromCart, cartItems: cartItem, totalPrice: total}}>
+          <Context.Provider value={{add: addToCart, del: delFromCart, cartItems: cartItem, totalPrice: total, transfer: transferUname, uname: username}}>
               {props.children}
           </Context.Provider>
       )
