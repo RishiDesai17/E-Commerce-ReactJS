@@ -50,7 +50,6 @@ const Login = (props) => {
         </Typography>
         <form className={classes.form} noValidate>
           <TextField
-                id="outlined-read-only-input"
                 label="Username"
                 required
                 fullWidth
