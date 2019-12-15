@@ -12,11 +12,9 @@ import {Context} from '../context/Context';
 import auth from '../auth';
 
 const PASSWORD='pass123';
-const u = 'xyz123';
 
 const useStyles = makeStyles(theme => ({
     paper: {
-      //marginTop: theme.spacing(8),
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
@@ -24,17 +22,16 @@ const useStyles = makeStyles(theme => ({
       justifyContent: 'center'
     },
     avatar: {
-      //margin: theme.spacing(1),
       backgroundColor: "green",
     },
     form: {
-      width: '100%',
-      //marginTop: theme.spacing(1),
+      width: '100%'
     },
   }));
 
 const Login = (props) => {
     const [password,setPassword] = useState("");
+    const [username,setUsername] = useState("");
     const context = useContext(Context);
     const classes = useStyles();
 
@@ -57,11 +54,8 @@ const Login = (props) => {
                 label="Username"
                 required
                 fullWidth
-                defaultValue="xyz123"
-                InputProps={{
-                    readOnly: true,
-                }}
                 variant="outlined"
+                onChange={(event)=>setUsername(event.target.value)}
             />
           <TextField
             variant="outlined"
@@ -84,7 +78,7 @@ const Login = (props) => {
             onClick={() => {
                 if(PASSWORD===password){
                  auth.login();
-                 transfer(u);
+                 transfer(username);
                }
                }}
           >
